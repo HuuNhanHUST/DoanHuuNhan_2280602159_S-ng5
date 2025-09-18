@@ -3,9 +3,11 @@ const app = express()
 const port = 3000
 let fs = require('fs')
 
+// Serve static files from public directory
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.sendFile(__dirname + '/public/index.html')
 })
 app.get('/posts', (req, res) => {
     let posts = fs.readFileSync('./db.json');
@@ -46,6 +48,9 @@ app.get('/posts', (req, res) => {
     res.send(posts)
 })
 app.get('/posts/:id', (req, res) => {
+    let posts = fs.readFileSync('./db.json');
+    posts = JSON.parse(posts).posts;
+    
     let id = req.params.id;
     let post = posts.filter(
         p=>p.id==id

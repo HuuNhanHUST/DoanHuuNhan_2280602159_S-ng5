@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Search App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Posts Search Application</h1>
+        </header>
+
+        <main>
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search posts by title..." autocomplete="off">
+                    <div id="suggestions" class="suggestions-container"></div>
+                </div>
+            </section>
+
+            <!-- Filter Section -->
+            <section class="filter-section">
+                <h3>Filter by Views</h3>
+                <div class="slider-container">
+                    <div class="slider-group">
+                        <label for="minViews">Min Views: <span id="minViewsValue">0</span></label>
+                        <input type="range" id="minViews" min="0" max="10000" value="0" step="10">
+                    </div>
+                    <div class="slider-group">
+                        <label for="maxViews">Max Views: <span id="maxViewsValue">10000</span></label>
+                        <input type="range" id="maxViews" min="0" max="10000" value="10000" step="10">
+                    </div>
+                </div>
+                <button id="applyFilter" class="apply-btn">Apply Filter</button>
+                <button id="clearFilter" class="clear-btn">Clear Filter</button>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="results-header">
+                    <h3>Results (<span id="resultCount">0</span>)</h3>
+                    <button id="loadAll" class="load-all-btn">Load All Posts</button>
+                </div>
+                <div id="postsContainer" class="posts-container">
+                    <div class="loading">Loading posts...</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
