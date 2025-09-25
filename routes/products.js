@@ -6,15 +6,22 @@ let productModel = require('../schemas/product')
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
-  let products = await productModel.find({})
-  res.send({
-    success: true,
-    data:products
-  });
+  try {
+    let products = await productModel.find({}).populate('category', 'name');
+    res.send({
+      success: true,
+      data: products
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      data: error
+    });
+  }
 });
 router.get('/:id', async function(req, res, next) {
   try {
-    let item = await productModel.findById(req.params.id);
+    let item = await productModel.findById(req.params.id).populate('category', 'name');
     res.send({
       success: true,
       data:item
@@ -47,21 +54,30 @@ router.post('/', async function(req,res,next){
   }
 })
 router.put('/:id', async function(req,res,next){
-  let updatedItem = await productModel.findByIdAndUpdate(
-    req.params.id,
-    {
-      name:req.body.name,
-      price:req.body.price,
-      description:req.body.description,
-      category:req.body.category
-    },{
-      new:true
-    }
-  )
-  res.send({
-      success: true,
-      data:updatedItem
-    })
+  try {
+    let updatedItem = await productModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        name:req.body.name,
+        price:req.body.price,
+        description:req.body.description,
+        category:req.body.category
+      },{
+        new:true
+      }
+    ).populate('category', 'name');
+    
+    res.send({
+        success: true,
+        data:updatedItem
+      });
+  } catch (error) {
+    res.status(400).send({
+      success: false,
+      data: error
+    });
+  }
+}
 
   // let item = await productModel.findById(req.params.id);
   // item.name = req.body.name?req.body.name:item.name;
