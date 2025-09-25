@@ -77,7 +77,7 @@ router.put('/:id', async function(req,res,next){
       data: error
     });
   }
-}
+});
 
   // let item = await productModel.findById(req.params.id);
   // item.name = req.body.name?req.body.name:item.name;
@@ -89,7 +89,6 @@ router.put('/:id', async function(req,res,next){
   //   success: true,
   //   data:item
   // })  
-})
 
 router.delete('/:id', async function(req, res, next) {
   try {
