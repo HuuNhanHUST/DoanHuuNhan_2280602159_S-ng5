@@ -24,14 +24,26 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/comments',require('./routes/comments'))
 app.use('/products',require('./routes/products'))
+app.use('/categories',require('./routes/categories'))
 
-mongoose.connect('mongodb://localhost:27017/NNPTUD-S5').catch(
+// MongoDB connection - you can switch between local and cloud
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/NNPTUD-S5';
+// For Atlas, replace with: 'mongodb+srv://username:password@cluster.mongodb.net/NNPTUD-S5'
+
+mongoose.connect(MONGODB_URI).catch(
   function(err){
-    console.log(err);
+    console.log('MongoDB connection error:', err.message);
+    console.log('Please check your MongoDB connection string');
   }
 )
 mongoose.connection.on('connected',function(){
-  console.log('connected');
+  console.log('✅ MongoDB connected successfully');
+})
+mongoose.connection.on('error', function(err) {
+  console.log('❌ MongoDB connection error:', err);
+})
+mongoose.connection.on('disconnected', function() {
+  console.log('⚠️ MongoDB disconnected');
 })
 
 // catch 404 and forward to error handler
@@ -47,7 +59,17 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  
+  // If it's an API request, send JSON response
+  if (req.path.startsWith('/api') || req.path.startsWith('/products') || req.path.startsWith('/categories') || req.path.startsWith('/users') || req.path.startsWith('/comments')) {
+    res.json({
+      success: false,
+      error: err.message,
+      status: err.status || 500
+    });
+  } else {
+    res.render('error');
+  }
 });
 
 module.exports = app;

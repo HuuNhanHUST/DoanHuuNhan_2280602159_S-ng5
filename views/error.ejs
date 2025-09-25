@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Error <%= error.status %></h1>
+    <p class="error"><%= error.message %></p>
+    <pre><%= error.stack %></pre>
+</body>
+</html>

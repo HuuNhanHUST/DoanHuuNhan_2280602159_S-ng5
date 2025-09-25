@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NNPTUD-S5 API</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 50px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container { 
+            background: rgba(255,255,255,0.1); 
+            padding: 30px; 
+            border-radius: 15px; 
+            backdrop-filter: blur(10px);
+        }
+        .api-list { background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .endpoint { margin: 10px 0; font-family: monospace; }
+        .method { padding: 5px 10px; border-radius: 5px; font-weight: bold; }
+        .get { background: #28a745; }
+        .post { background: #007bff; }
+        .put { background: #ffc107; color: black; }
+        .delete { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 NNPTUD-S5 API Server</h1>
+        <p>Server is running successfully!</p>
+        
+        <div class="api-list">
+            <h2>📋 Categories API</h2>
+            <div class="endpoint"><span class="method get">GET</span> /categories - Get all categories</div>
+            <div class="endpoint"><span class="method get">GET</span> /categories/:id - Get category by ID</div>
+            <div class="endpoint"><span class="method post">POST</span> /categories - Create new category</div>
+            <div class="endpoint"><span class="method put">PUT</span> /categories/:id - Update category</div>
+            <div class="endpoint"><span class="method delete">DELETE</span> /categories/:id - Delete category</div>
+        </div>
+
+        <div class="api-list">
+            <h2>🛍️ Products API</h2>
+            <div class="endpoint"><span class="method get">GET</span> /products - Get all products</div>
+            <div class="endpoint"><span class="method get">GET</span> /products/:id - Get product by ID</div>
+            <div class="endpoint"><span class="method post">POST</span> /products - Create new product</div>
+            <div class="endpoint"><span class="method put">PUT</span> /products/:id - Update product</div>
+            <div class="endpoint"><span class="method delete">DELETE</span> /products/:id - Delete product</div>
+        </div>
+
+        <div class="api-list">
+            <h2>👥 Other APIs</h2>
+            <div class="endpoint"><span class="method get">GET</span> /users - Users API</div>
+            <div class="endpoint"><span class="method get">GET</span> /comments - Comments API</div>
+        </div>
+
+        <p><strong>💡 Tip:</strong> Use Postman or similar tools to test the API endpoints above.</p>
+    </div>
+</body>
+</html>
